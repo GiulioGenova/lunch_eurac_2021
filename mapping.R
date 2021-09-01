@@ -13,6 +13,9 @@ origAddress_geocoded = read.csv("origAddress_geocoded.csv")
 Lunch =  st_as_sf(origAddress_geocoded,coords =c("long","lat"))
 Lunch =  Lunch %>%  distinct(.keep_all = TRUE)
 
+st_write(Lunch, update = TRUE, driver = 'kml', 
+dsn = "Lunch.kml")
+
 rownames(Lunch) <- paste(Lunch$Descrizione,Lunch$Tipo,Lunch$Indirizzo,sep=" | ")
 
 map_viz = mapview()+mapview(Lunch)
